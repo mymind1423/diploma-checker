@@ -14,7 +14,7 @@ import StudentsComp from "./components/Students";
 import SettingsComp from "./components/Settings";
 import ProfileComp from "./components/Profile";
 
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = "https://backend-diploma-q2sg.onrender.com/";
 
 function App() {
   const [file, setFile] = useState(null);
@@ -207,7 +207,7 @@ function App() {
 
 
   const openReleve = (studentId, level) => {
-    const url = `http://localhost:3000/releves/${studentId}_${level}.pdf`;
+    const url = `https://backend-diploma-q2sg.onrender.com/releves/${studentId}_${level}.pdf`;
     window.open(url, "_blank");
   };
 
