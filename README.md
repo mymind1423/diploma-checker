@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# Portail de Vérification des Diplômes — Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Résumé**: Ce dépôt contient une application React (Create React App) servant de portail de vérification des diplômes. L'application propose : authentification, upload OCR, recherche par référence, affichage détaillé des diplômes, gestion des étudiants, et un tableau de bord moderne.
 
-## Available Scripts
+**Stack principal**:
+- **Frontend**: React (react, react-dom), Bootstrap, axios, lottie-react, react-icons
+- **Dev / build**: react-scripts (Create React App)
 
-In the project directory, you can run:
+**Ce README** décrit : installation rapide, structure du projet, composants principaux, points d'API utilisés et étapes de développement courantes.
 
-### `npm start`
+**Prérequis**:
+- Node.js (>=14) et npm
+- Backend API accessible (par défaut `http://localhost:3000/api`)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Installation & Exécution**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Exécutez ces commandes depuis la racine du projet (`c:\Users\mouad\Documents\frontend`):
 
-### `npm test`
+```powershell
+npm install
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ouvrez ensuite `http://localhost:3000`.
 
-### `npm run build`
+**Variables d'environnement**
+- Si vous souhaitez configurer l'URL de l'API depuis un fichier `.env`, ajoutez par exemple :
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```text
+REACT_APP_API_URL=http://localhost:3000/api
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+et modifiez `src/services/api.js` pour utiliser `process.env.REACT_APP_API_URL`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Points d'API appelés (attendus par le frontend)**
+- `POST /api/auth/login` — login (renvoie `accessToken`)
+- `POST /api/auth/refresh` — rafraîchir token (cookies)
+- `POST /api/ocr/upload` — upload et extraction OCR (renvoie référence)
+- `GET /api/diplomes/:reference` — obtenir diplôme par référence
+- `GET /api/students` — liste des étudiants
+- `PUT /api/users/me` — (optionnel) mise à jour du profil utilisateur
 
-### `npm run eject`
+Adaptez ces routes si votre backend utilise des chemins différents.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Structure importante du projet**
+- `public/` : index.html, manifest, assets statiques
+- `src/` : code source React
+	- `src/App.js` : composant principal + pages + logique d'auth et fetch sécurisé
+	- `src/index.js` : point d'entrée
+	- `src/components/` : composants UI (Sidebar, NavBar, Dashboard, Students, Profile, Settings, Footer, etc.)
+	- `src/services/api.js` : wrapper axios / fonctions d'API
+	- `src/assets/` : images et animations Lottie
+	- `src/App.css`, `src/theme.css` : styles globaux
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Composants clés**
+- `Sidebar.jsx` : navigation latérale
+- `NavBar.jsx` : barre supérieure (recherche, notifications, utilisateur)
+- `Dashboard.jsx` : cartes de statistiques et actions rapides
+- `OcrUpload.jsx` : composant d'upload OCR
+- `DiplomeList.jsx` / `DiplomaCard` : affichage détaillé du diplôme (maintenant affiche toutes les clés renvoyées par l'API)
+- `Students.jsx` : table des étudiants avec recherche côté client
+- `Profile.jsx` : editeur de profil (nom d'utilisateur, mot de passe)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Comportement principal**
+- Authentification par token : le frontend stocke le token en mémoire et utilise `secureFetch` (wrapper) pour ajouter `Authorization: Bearer <token>`.
+- Si une requête renvoie 401, `secureFetch` tente d'appeler `POST /api/auth/refresh` pour obtenir un nouveau token puis répète la requête.
+- L'upload OCR renvoie une `reference` qui est ensuite utilisée pour récupérer le diplôme complet.
+- L'affichage du diplôme a été amélioré : toutes les clés retournées dans l'objet `result.data` sont listées, les liens/images sont affichés et chaque valeur est copiable via un bouton.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Personnalisation & amélioration possible**
+- Remplacer la gestion du token en mémoire par `localStorage` ou `redux` si nécessaire.
+- Ajouter `react-router-dom` pour routes réelles (actuellement les pages sont gérées par état `page`).
+- Ajouter tests unitaires pour composants et intégration API.
+- Ajouter toasts/notifications (ex: react-toastify) pour les retours utilisateur (copie, sauvegarde profil, erreurs serveur).
 
-## Learn More
+**Conseils de développement**
+- Pour modifier l'URL API globalement : vérifier `src/services/api.js` et/ou utiliser `REACT_APP_API_URL`.
+- Pour ajouter une nouvelle page : créer un composant dans `src/components/`, ajouter une entrée dans `Sidebar.jsx` et rendre conditionnellement depuis `src/App.js`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Débogage rapide**
+- Erreur CORS : vérifier la configuration du backend et autoriser `http://localhost:3000`.
+- 401 / refresh : assurez-vous que `POST /api/auth/refresh` fonctionne avec `credentials: include` si vous utilisez refresh token via cookie.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Contribuer**
+- Fork, créez une branche `feature/xxx`, envoyez une pull request. Documentez votre changement dans ce README.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Si vous voulez, je peux :
+- Générer une version en anglais aussi.
+- Ajouter un `CONTRIBUTING.md` et un guide de style.
+- Mettre en place `react-router-dom` et migrer la navigation vers de vraies routes.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Dites-moi ce que vous préférez et j'ajoute ces éléments.

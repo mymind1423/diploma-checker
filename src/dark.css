@@ -1,0 +1,140 @@
+/* ------------------------------------------------------ */
+/* DARK MODE OVERRIDES */
+/* ------------------------------------------------------ */
+
+body.dark {
+  background-color: #121212 !important;
+  color: #e4e4e4 !important;
+}
+
+/* VARIABLES SOMBRES */
+body.dark {
+  --primary-color: #4c8dff;
+  --secondary-color: #1e1e1e;
+  --accent-color: #ffae70;
+  --text-color: #e9e9e9;
+
+  --card-bg: #1e1e1e;
+  --card-gradient: linear-gradient(135deg, #0046a6, #2f74d0);
+  --hover-gradient: linear-gradient(135deg, #2f74d0, #0046a6);
+}
+
+/* CARD DARK MODE */
+body.dark .card,
+body.dark .login-card,
+body.dark .search-card,
+body.dark .upload-card,
+body.dark .diplome-card,
+body.dark .diplome-card-wide {
+  background: var(--secondary-color) !important;
+  color: var(--text-color) !important;
+  box-shadow: 0 10px 28px rgba(255,255,255,0.05) !important;
+}
+
+body.dark .card:hover {
+  color: white !important;
+}
+
+/* INPUTS */
+body.dark input,
+body.dark .login-input,
+body.dark select,
+body.dark textarea {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  color: #fff !important;
+}
+
+body.dark input:focus {
+  border-color: #4c8dff !important;
+  box-shadow: 0 0 0 3px rgba(76,141,255,0.25) !important;
+}
+
+/* BUTTONS */
+body.dark .btn {
+  background: var(--primary-color) !important;
+  color: white !important;
+}
+
+body.dark .btn:hover {
+  background: var(--accent-color) !important;
+}
+
+/* DIPLOMA FIELDS */
+body.dark .diplome-field {
+  background: #2a2a2a !important;
+}
+
+body.dark .field-label {
+  color: #4c8dff !important;
+}
+
+body.dark .field-value {
+  color: #ddd !important;
+}
+
+/* LOGIN BACKGROUND */
+body.dark .login-wrapper {
+  background: linear-gradient(135deg, #0b1120, #121a2f) !important;
+}
+
+/* SEARCH / UPLOAD DROPZONE */
+body.dark .upload-dropzone,
+body.dark .search-suggestions {
+  background: #1c1c1c !important;
+  border-color: #555 !important;
+  color: #ddd !important;
+}
+
+body.dark .upload-dropzone:hover {
+  border-color: var(--primary-color) !important;
+}
+
+body.dark .search-suggestions li:hover {
+  background: #2b2b2b !important;
+}
+
+/* PHOTO + QR CARDS */
+body.dark .photo-card,
+body.dark .qr-card {
+  background: #2b2b2b !important;
+  box-shadow: 
+    0 4px 14px rgba(0,0,0,0.35),
+    0 0 18px rgba(76,119,255,0.2);
+}
+
+/* COPY BUTTON */
+body.dark .copy-btn {
+  background: #2a2a2a !important;
+  color: #4c8dff !important;
+  border-color: #3a4a6a !important;
+}
+
+body.dark .copy-btn:hover {
+  background: #4c8dff !important;
+  color: white !important;
+}
+
+/* TABLES */
+body.dark table {
+  color: #fff !important;
+}
+
+body.dark thead {
+  background: #333 !important;
+}
+
+body.dark tbody tr:hover {
+  background: rgba(255,255,255,0.05) !important;
+}
+
+/* SEARCH ICON & UPLOAD ICON */
+body.dark .search-icon-circle,
+body.dark .upload-icon-circle {
+  background: linear-gradient(135deg, #4c8dff, #2f74d0) !important;
+}
+
+/* LINKS / TEXT */
+body.dark a {
+  color: #72aaff !important;
+}

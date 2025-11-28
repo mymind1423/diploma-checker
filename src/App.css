@@ -1,38 +1,655 @@
-.App {
-  text-align: center;
+/* ------------------------------------------------------ */
+/* ROOT VARIABLES */
+/* ------------------------------------------------------ */
+:root {
+  --primary-color: #0366d6;
+  --secondary-color: #f5f5f5;
+  --accent-color: #ff7f50;
+  --text-color: #333;
+  --error-color: #e74c3c;
+
+  --card-bg: #fff;
+  --card-gradient: linear-gradient(135deg, #0366d6, #58a6ff);
+  --hover-gradient: linear-gradient(135deg, #58a6ff, #0366d6);
+
+  --radius: 18px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* ------------------------------------------------------ */
+/* GLOBAL */
+/* ------------------------------------------------------ */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ------------------------------------------------------ */
+/* GENERAL CARDS */
+/* ------------------------------------------------------ */
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 2rem;
+  flex: 1 1 320px;
+  max-width: 400px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: var(--card-gradient);
+  opacity: 0.05;
+  transform: rotate(45deg);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  background: var(--hover-gradient);
+  color: #fff;
+}
+
+/* ------------------------------------------------------ */
+/* INPUTS + BUTTONS */
+/* ------------------------------------------------------ */
+
+input[type="text"],
+input[type="password"],
+input[type="file"] {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.75rem 1.3rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.btn:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.error {
+  color: var(--error-color);
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------ */
+/* DIPLOMA CARD */
+/* ------------------------------------------------------ */
+
+.diplome-card {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 30px;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.1);
+}
+
+.photo-card {
+  padding: 10px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 
+    0 4px 14px rgba(0,0,0,0.15),       /* Ombre classique */
+    0 0 18px rgba(0, 102, 255, 0.25);  /* Glow bleu léger */
+  transition: 0.3s ease;
+  display: inline-block;
+}
+
+.photo-card:hover {
+  box-shadow: 
+    0 6px 18px rgba(0,0,0,0.18),
+    0 0 25px rgba(0, 102, 255, 0.35);
+}
+
+.photo-img {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 12px;
+}
+
+.qr-code {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.qr-card {
+  padding: 12px;
+  background: white;
+  border-radius: 14px;
+  display: inline-block;
+  box-shadow: 
+    0 4px 14px rgba(0,0,0,0.15),       /* Ombre classique */
+    0 0 18px rgba(0, 102, 255, 0.25);  /* Glow bleu léger */
+  transition: 0.3s ease;
+}
+
+/* Optionnel : glow un peu plus fort au survol */
+.qr-card:hover {
+  box-shadow: 
+    0 6px 18px rgba(0,0,0,0.18),
+    0 0 25px rgba(0, 102, 255, 0.35);
+}
+
+
+.releves-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.releve-btn {
+  background: #4c6fff;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  transition: 0.25s;
+}
+
+.releve-btn:hover {
+  background: #3453cc;
+}
+
+.diplome-details {
   display: flex;
   flex-direction: column;
+  gap: 14px;
+}
+
+.diplome-field {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #f7f9fc;
+  padding: 12px 15px;
+  border-radius: 10px;
+}
+
+/* Full width diploma card */
+.diplome-card-wide {
+  width: 100%;
+  max-width: 1500px;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 40px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+/* 3 columns clean layout */
+.details-column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Better spacing */
+.diplome-field {
+  background: #f7f9fc;
+  border-radius: 12px;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  padding-right: 50px;
+}
+
+.field-label {
+  width: 40%;
+  font-weight: 600;
+  color: #0366d6;
+}
+
+.field-value {
+  width: 60%;
+  color: #333;
+}
+
+@media(max-width: 768px) {
+  .diplome-field {
+    flex-direction: column;
+  }
+  .field-label {
+    width: 100%;
+  }
+}
+
+/* Bouton copie modernisé */
+.copy-btn {
+  background: white;
+  color: #0056d6;
+  border: 1px solid #cdd9f0;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  padding: 0;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.copy-btn:hover {
+  background: #0056d6;
+  color: white;
+  border-color: #0056d6;
+}
+
+
+/* ------------------------------------------------------ */
+/* LOGIN PAGE */
+/* ------------------------------------------------------ */
+
+.login-wrapper {
+  height: 100vh;
+  background: linear-gradient(135deg, #e3ecff, #f5f8ff);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background: white;
+  max-width: 420px;
+  width: 100%;
+  border-radius: 18px;
+  padding: 35px;
+  border: 1px solid #e5e9f0;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-logo {
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.login-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a3f8b;
+}
+
+.login-subtitle {
+  font-size: 0.95rem;
+  color: #556b8a;
+}
+
+.login-input {
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid #c8d6e5;
+  transition: 0.25s;
+}
+
+.login-input:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26,115,232,0.2);
+}
+
+.login-btn {
+  height: 50px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+/* ------------------------------------------------------ */
+/* UPLOAD */
+/* ------------------------------------------------------ */
+
+.upload-wrapper {
+  animation: fadeIn 0.5s ease;
+}
+
+.upload-header {
+  max-width: 700px;
+  margin: auto;
+}
+
+.upload-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #1144aa;
+}
+
+.upload-subtitle {
+  font-size: 1.05rem;
+  opacity: 0.8;
+}
+
+.upload-card {
+  border-radius: 18px;
+  background: white;
+}
+
+.upload-dropzone {
+  border: 2px dashed #b8c7e0;
+  padding: 40px;
+  border-radius: 18px;
+  cursor: pointer;
+  background: #f9fbff;
+  transition: 0.3s;
+}
+
+.upload-dropzone:hover,
+.upload-dropzone.drag-active {
+  background: #eef3ff;
+  border-color: #4c6fff;
+}
+
+.big-upload-btn {
+  padding: 16px;
+  font-size: 1.15rem;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+/* Animated Upload Icon */
+.upload-icon-circle {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4c6fff, #6aa8ff);
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  font-size: 1.7rem;
+  animation: pulseIcon 1.4s infinite;
 }
 
-.App-link {
-  color: #61dafb;
+/* ------------------------------------------------------ */
+/* SEARCH */
+/* ------------------------------------------------------ */
+
+.search-wrapper {
+  animation: fadeIn 0.5s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-header {
+  max-width: 700px;
+  margin: auto;
+}
+
+.search-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #1144aa;
+}
+
+.search-subtitle {
+  font-size: 1.05rem;
+  opacity: 0.8;
+}
+
+.search-card {
+  border-radius: 18px;
+  background: white;
+}
+
+.search-input {
+  border-radius: 14px;
+  height: 55px;
+  padding-left: 18px;
+  border: 1px solid #b8c7e0;
+}
+
+.search-suggestions {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  list-style: none;
+  padding: 6px 0;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.search-suggestions li {
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.search-suggestions li:hover {
+  background: #f0f4ff;
+}
+
+.big-search-btn {
+  padding: 16px;
+  font-size: 1.15rem;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+/* Animated Search Icon */
+.search-icon-circle {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff7f50, #ffb36a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.7rem;
+  animation: pulseIcon 1.4s infinite;
+}
+
+/* Pulse for upload & search icons */
+@keyframes pulseIcon {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76,111,255,0.6); }
+  70% { transform: scale(1.07); box-shadow: 0 0 0 12px rgba(76,111,255,0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76,111,255,0); }
+}
+
+/* ------------------------------------------------------ */
+/* RESPONSIVE */
+/* ------------------------------------------------------ */
+
+@media(max-width: 992px) {
+  .field-label { min-width: 120px; }
+}
+
+@media(max-width: 768px) {
+  .diplome-field { flex-direction: column; }
+  .field-label { min-width: auto; }
+}
+
+/* ------------------------------------------------------ */
+/* DARK MODE OVERRIDES */
+/* ------------------------------------------------------ */
+
+body.dark {
+  background-color: #121212 !important;
+  color: #e4e4e4 !important;
+}
+
+/* VARIABLES SOMBRES */
+body.dark {
+  --primary-color: #4c8dff;
+  --secondary-color: #1e1e1e;
+  --accent-color: #ffae70;
+  --text-color: #e9e9e9;
+
+  --card-bg: #1e1e1e;
+  --card-gradient: linear-gradient(135deg, #0046a6, #2f74d0);
+  --hover-gradient: linear-gradient(135deg, #2f74d0, #0046a6);
+}
+
+/* CARD DARK MODE */
+body.dark .card,
+body.dark .login-card,
+body.dark .search-card,
+body.dark .upload-card,
+body.dark .diplome-card,
+body.dark .diplome-card-wide {
+  background: var(--secondary-color) !important;
+  color: var(--text-color) !important;
+  box-shadow: 0 10px 28px rgba(255,255,255,0.05) !important;
+}
+
+body.dark .card:hover {
+  color: white !important;
+}
+
+/* INPUTS */
+body.dark input,
+body.dark .login-input,
+body.dark select,
+body.dark textarea {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  color: #fff !important;
+}
+
+body.dark input:focus {
+  border-color: #4c8dff !important;
+  box-shadow: 0 0 0 3px rgba(76,141,255,0.25) !important;
+}
+
+/* BUTTONS */
+body.dark .btn {
+  background: var(--primary-color) !important;
+  color: white !important;
+}
+
+body.dark .btn:hover {
+  background: var(--accent-color) !important;
+}
+
+/* DIPLOMA FIELDS */
+body.dark .diplome-field {
+  background: #2a2a2a !important;
+}
+
+body.dark .field-label {
+  color: #4c8dff !important;
+}
+
+body.dark .field-value {
+  color: #ddd !important;
+}
+
+/* LOGIN BACKGROUND */
+body.dark .login-wrapper {
+  background: linear-gradient(135deg, #0b1120, #121a2f) !important;
+}
+
+/* SEARCH / UPLOAD DROPZONE */
+body.dark .upload-dropzone,
+body.dark .search-suggestions {
+  background: #1c1c1c !important;
+  border-color: #555 !important;
+  color: #ddd !important;
+}
+
+body.dark .upload-dropzone:hover {
+  border-color: var(--primary-color) !important;
+}
+
+body.dark .search-suggestions li:hover {
+  background: #2b2b2b !important;
+}
+
+/* PHOTO + QR CARDS */
+body.dark .photo-card,
+body.dark .qr-card {
+  background: #2b2b2b !important;
+  box-shadow: 
+    0 4px 14px rgba(0,0,0,0.35),
+    0 0 18px rgba(76,119,255,0.2);
+}
+
+/* COPY BUTTON */
+body.dark .copy-btn {
+  background: #2a2a2a !important;
+  color: #4c8dff !important;
+  border-color: #3a4a6a !important;
+}
+
+body.dark .copy-btn:hover {
+  background: #4c8dff !important;
+  color: white !important;
+}
+
+/* TABLES */
+body.dark table {
+  color: #fff !important;
+}
+
+body.dark thead {
+  background: #333 !important;
+}
+
+body.dark tbody tr:hover {
+  background: rgba(255,255,255,0.05) !important;
+}
+
+/* SEARCH ICON & UPLOAD ICON */
+body.dark .search-icon-circle,
+body.dark .upload-icon-circle {
+  background: linear-gradient(135deg, #4c8dff, #2f74d0) !important;
+}
+
+/* LINKS / TEXT */
+body.dark a {
+  color: #72aaff !important;
 }

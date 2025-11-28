@@ -1,0 +1,99 @@
+/* --------------------------- */
+/*   DASHBOARD WRAPPER        */
+/* --------------------------- */
+.dashboard-container {
+  padding: 20px;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1144aa;
+  margin-bottom: 25px;
+}
+
+
+
+/* --------------------------- */
+/*   CARDS                     */
+/* --------------------------- */
+.dashboard-cards {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.dash-card {
+  flex: 1 1 280px;
+  background: white;
+  padding: 30px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: 0.3s ease;
+}
+
+.dash-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.dash-card h3 {
+  font-size: 2.2rem;
+  margin: 15px 0 5px;
+  font-weight: 800;
+  color: #222;
+}
+
+.dash-card p {
+  font-size: 1rem;
+  color: #777;
+  font-weight: 500;
+}
+
+
+
+/* --------------------------- */
+/*   ICONS                     */
+/* --------------------------- */
+.dash-icon {
+  font-size: 2rem;
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.icon-blue { background: #3c7fff; }
+.icon-green { background: #2ecc71; }
+.icon-purple { background: #9b59b6; }
+
+
+/* --------------------------- */
+/*   ACTION BUTTONS            */
+/* --------------------------- */
+.dashboard-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.big-btn {
+  flex: 1 1 300px;
+  padding: 18px;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
