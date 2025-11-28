@@ -14,7 +14,7 @@ import StudentsComp from "./components/Students";
 import SettingsComp from "./components/Settings";
 import ProfileComp from "./components/Profile";
 
-const BASE_URL = "https://backend-diploma-q2sg.onrender.com";
+const BASE_URL = "https://backend-diploma-q2sg.onrender.com/api";
 
 function App() {
   const [file, setFile] = useState(null);
