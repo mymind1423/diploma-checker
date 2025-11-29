@@ -8,7 +8,7 @@ export default function StudentsComp({ token }) {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/students", {
+    fetch("https://backend-diploma-q2sg.onrender.com/api/students", {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -122,3 +122,4 @@ export default function StudentsComp({ token }) {
     </div>
   );
 }
+
