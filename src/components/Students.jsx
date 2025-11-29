@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FiSearch, FiUpload } from "react-icons/fi";
+import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 export default function StudentsComp({ token }) {
 
@@ -8,7 +11,7 @@ export default function StudentsComp({ token }) {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/students", {
+    fetch("https://backend-diploma-q2sg.onrender.com/api/students", {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -24,7 +27,27 @@ export default function StudentsComp({ token }) {
       });
   }, [token]);
 
+  // 👉 Export Excel
+  const exportToExcel = () => {
+    const dataToExport = students.map(s => ({
+      Référence: s.reference,
+      Nom: s.fullName,
+      "Date naissance": s.dateNaissance ? new Date(s.dateNaissance).toLocaleDateString() : "",
+      Filière: s.filiere,
+      Email: s.email,
+      Téléphone: s.telephone,
+      Vérifié: "Oui"
+    }));
 
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Étudiants");
+
+    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    saveAs(new Blob([excelBuffer]), "students.xlsx");
+  };
+
+  // 👉 Filter
   const filtered = students.filter(s =>
     s.fullName?.toLowerCase().includes(query.toLowerCase()) ||
     s.reference?.toLowerCase().includes(query.toLowerCase())
@@ -54,6 +77,14 @@ export default function StudentsComp({ token }) {
               />
             </div>
 
+            {/* EXPORT BUTTON */}
+            <button
+              className="btn btn-success d-flex align-items-center gap-2 export-btn"
+              onClick={exportToExcel}
+            >
+              📤 Exporter
+            </button>
+
             {/* UPLOAD BUTTON */}
             <button className="btn btn-primary d-flex align-items-center gap-2 upload-btn">
               <FiUpload size={18} />
@@ -76,7 +107,7 @@ export default function StudentsComp({ token }) {
                   <th>Filière</th>
                   <th>Email</th>
                   <th>Téléphone</th>
-                  <th>Adresse</th>
+                  <th>Vérifié</th>
                 </tr>
               </thead>
               <tbody>
@@ -88,7 +119,11 @@ export default function StudentsComp({ token }) {
                     <td>{s.filiere}</td>
                     <td>{s.email}</td>
                     <td>{s.telephone}</td>
-                    <td>{s.adresse}</td>
+
+                    {/* Vérifié + icône */}
+                    <td>
+                        <AiOutlineCheckCircle color="green" size={22} /> 
+                    </td>
                   </tr>
                 )) : (
                   <tr>
@@ -107,14 +142,14 @@ export default function StudentsComp({ token }) {
       {/* EXTRA ANIMATIONS */}
       <style>
         {`
-          .upload-btn {
+          .upload-btn, .export-btn {
             transition: all 0.3s ease;
           }
-          .upload-btn:hover {
+          .upload-btn:hover, .export-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(0,0,0,0.15);
           }
-          .upload-btn:active {
+          .upload-btn:active, .export-btn:active {
             transform: scale(0.97);
           }
         `}
