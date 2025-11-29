@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiSearch, FiUpload } from "react-icons/fi";
+import { FiSearch, FiUpload, FiDownload } from "react-icons/fi";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
@@ -81,8 +81,8 @@ export default function StudentsComp({ token }) {
             <button 
               className="btn btn-success d-flex align-items-center gap-2 export-btn"
               onClick={exportToExcel}>
-              <FiUpload size={18} />
-              Importer
+              <FiDownload size={18} />
+              Exporter
             </button>
           </div>
         </div>
