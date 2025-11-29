@@ -251,12 +251,15 @@ function App() {
               <div className="qr-card mt-3">
                 <img src={result.qrCode} alt="QR" className="qr-code" />
               </div>
+              <div className="field-value">
+                Scanner ce code QR pour voir le diplome
+              </div>
             )}
 
             <div className="releves-container mt-3">
-              <button className="releve-btn" onClick={() => openReleve(result.data.ID_ETUDIANT, "L1")}>📘 L1</button>
-              <button className="releve-btn" onClick={() => openReleve(result.data.ID_ETUDIANT, "L2")}>📙 L2</button>
-              <button className="releve-btn" onClick={() => openReleve(result.data.ID_ETUDIANT, "L3")}>📗 L3</button>
+              <button className="releve-btn" onClick={() => openReleve(result.data.ID_ETUDIANT, "L1")}>📘 Relevé L1</button>
+              <button className="releve-btn" onClick={() => openReleve(result.data.ID_ETUDIANT, "L2")}>📙 Relevé L2</button>
+              <button className="releve-btn" onClick={() => openReleve(result.data.ID_ETUDIANT, "L3")}>📗 Relevé L3</button>
             </div>
 
           </div>
