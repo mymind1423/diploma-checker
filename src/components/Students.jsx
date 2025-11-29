@@ -77,16 +77,10 @@ export default function StudentsComp({ token }) {
               />
             </div>
 
-            {/* EXPORT BUTTON */}
-            <button
-              className="btn btn-success d-flex align-items-center gap-2 export-btn"
-              onClick={exportToExcel}
-            >
-              📤 Exporter
-            </button>
-
             {/* UPLOAD BUTTON */}
-            <button className="btn btn-primary d-flex align-items-center gap-2 upload-btn">
+            <button 
+              className="btn btn-success d-flex align-items-center gap-2 export-btn"
+              onClick={exportToExcel}>
               <FiUpload size={18} />
               Importer
             </button>
