@@ -1,0 +1,16 @@
+name: diploma_checker_mobile
+version: 1.0.0+1
+description: Flutter mobile version of the Diploma Checker React app.
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.1
+  image_picker: ^1.1.2
+
+flutter:
+  uses-material-design: true
